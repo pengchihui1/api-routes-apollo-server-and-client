@@ -1,0 +1,8 @@
+apollo-server(服务官网) https://www.apollographql.com/docs/apollo-server/
+graphql-playground(客服端下载) https://www.electronjs.org/apps/graphql-playground
+graphql playground(git下载链接)  https://github.com/prisma/graphql-playground/releases
+nextjs(next官网)  https://www.nextjs.cn/docs/api-reference/next/router
+
+apollo-client 数据查询成功
+apollo-client 数据更新参考https://www.bilibili.com/video/BV1yJ411w7vx?p=5
+apollo-client

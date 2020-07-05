@@ -1,37 +1,52 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery,useMutation } from '@apollo/react-hooks'
 import { initializeApollo } from '../apollo/client'
+import { ThemeProvider,Button,Text  } from "@chakra-ui/core";
+import Router from 'next/router'  
 
+// 定义查询内容
 const ViewerQuery = gql`
   query ViewerQuery {
     viewer {
       id
       name
       status
+			titile
+			email
+			pwd
+			success
     }
   }
 `
 
 const Index = () => {
-  const {
-    data: { viewer }
-  } = useQuery(ViewerQuery)
-
+	
+		//执行查询 
+		const { loading, error,	data: { viewer }} = useQuery(ViewerQuery);
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+		 
+		 
   return (
-    <div>
-      You're signed in as {viewer.name} and you're {viewer.status} goto{' '}
-      <Link href='/about'>
-        <a>static</a>
-      </Link>{' '}
-      page.
-    </div>
+		<ThemeProvider>
+		<Text as="samp" color="tomato">apollo-server数据列表</Text>
+		   <ul>
+			 {viewer.map(function(item,index){
+				  return  <li key={index}>name:{item.name}---- pwd:{item.pwd}----email:{item.email }</li>
+			 })}
+			</ul>
+  
+			<div></div>
+		
+			<Button  type="submit" onClick={()=>{Router.push("/apollo-mutations") }}>进入添加页面</Button>
+			<div></div>
+	</ThemeProvider>
   )
 }
 
 export async function getStaticProps () {
   const apolloClient = initializeApollo()
-
   await apolloClient.query({
     query: ViewerQuery
   })
