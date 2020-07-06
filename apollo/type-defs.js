@@ -22,7 +22,7 @@ type Book {
 }
 
 type Mutation {
-	   addTodo(name: String, pwd: String):[User]
+	   addTodo(name: String, pwd: String):User
      removeTodo(id:Int):[User]
      updateTodo(id:Int):[User]
 	   addBook(title: String, author: String): [Book]

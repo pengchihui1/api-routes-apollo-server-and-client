@@ -5,6 +5,7 @@ import { useQuery, useMutation } from '@apollo/react-hooks'
 import { initializeApollo } from '../apollo/client'
 import { ThemeProvider, Button, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/core'
 import Router from 'next/router'
+import formA from './form'
 
 // 定义查询内容
 const ViewerQuery = gql`
@@ -36,13 +37,13 @@ const Index = () => {
         })}
       </ul>
       <div />
-      <Button type='submit' onClick={() => { Router.push('/') }}>添加</Button>
+      <Button type='submit' onClick={() => { Router.push('/form') }}>Form测试</Button>
       <div />
     </ThemeProvider>
   )
 }
 
-export async function getStaticProps() {
+export async function getStaticProps () {
   const apolloClient = initializeApollo()
   await apolloClient.query({
     query: ViewerQuery

@@ -13,21 +13,21 @@ var ArrayObj = [
 export const resolvers = {
   Query: {
     // 查询
-    viewer(_parent, _args, _context, _info) {
+    viewer (_parent, _args, _context, _info) {
       return ArrayObj
     }
   },
   Mutation: {
     // 新增后执行的回传 定义全局变量  拼接后return返回
-    addTodo(_parent, _args, _context, _info) {
+    addTodo (_parent, _args, _context, _info) {
       var arr = ArrayObj
       const input = _args
       arr.push({ name: input.name, pwd: input.pwd })
       ArrayObj = arr
-      return ArrayObj
+      return { name: input.name, pwd: input.pwd }
     },
     // 删除
-    removeTodo(_parent, _args, _context, _info) {
+    removeTodo (_parent, _args, _context, _info) {
       const input = _args
       const newCount = ArrayObj.filter((item, index) => {
         return item.id !== input.id

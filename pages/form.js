@@ -1,10 +1,26 @@
 import gql from 'graphql-tag'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { initializeApollo } from '../apollo/client'
-import { ThemeProvider, Button, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/core'
+import { ThemeProvider, Button, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input, List, ListItem } from '@chakra-ui/core'
 import Router from 'next/router'
+import { Formik, Field } from 'formik'
+
+// 定义查询内容
+const ViewerQuery = gql`
+  query ViewerQuery {
+    viewer {
+      id
+      name
+      status
+			titile
+			email
+			pwd
+			success
+    }
+  }
+`
 
 // 定义增加内容
 const ADD_TODO = gql`
@@ -17,34 +33,98 @@ const ADD_TODO = gql`
 `
 
 const Index = () => {
+  const [user, setUser] = useState([])
+  // 执行查询
+  const { loading, error, data } = useQuery(ViewerQuery)
+  // 记录查询后并增加的内容
+  useEffect(() => {
+    console.log('nimei', data.viewer.length)
+    if (data.viewer.length) {
+      console.log(data.viewer)
+      setUser(data.viewer)
+    }
+  }, [data.viewer])
+
   // 执行增加
-  const [addTodo, { data }] = useMutation(ADD_TODO)
+  const [addTodo] = useMutation(ADD_TODO)
 
-  var num = 1
-  const obj = {
-    id: num++,
-    name: 'dfe',
-    status: 'cached',
-    titile: '荔枝',
-    email: null,
-    pwd: null,
-    success: true
+  function validateName (value) {
+    let error
+    if (!value) {
+      error = 'Name is required'
+    } else {
+
+    }
+    return error
   }
-  const [datas, setDatas] = useState(obj)
-
+  // const a = data
   return (
     <ThemeProvider>
-      <FormControl>
-        <FormLabel htmlFor='email'>Email address</FormLabel>
-        <Input type='email' id='email' aria-describedby='email-helper-text' />
-        <FormHelperText id='email-helper-text'>
-          We'll never share your email.
-        </FormHelperText>
-      </FormControl>
-      <Button type='submit' onClick={() => { Router.push('/') }}>添加</Button>
-      <div />
+      <Formik
+        initialValues={{ name: '', password: '' }}
+        onSubmit={(values, { setSubmitting }) => {
+          addTodo({ variables: { name: values.name, pwd: values.password } })
+            .then(({ data }) => {
+              setSubmitting(false)
+              setUser([...user, { ...data.addTodo, id: parseInt(Math.random() * 100) }])
+            })
+        }}
+      >
+        {props => (
+          <form onSubmit={props.handleSubmit}>
+            <Field name='name' validate={validateName}>
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.name && form.touched.name}>
+                  <FormLabel htmlFor='name'>Name</FormLabel>
+                  <Input {...field} id='name' placeholder='name' />
+                  <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Field name='password' validate={validateName}>
+              {({ field, form }) => (
+                <FormControl isInvalid={form.errors.password && form.touched.password}>
+                  <FormLabel htmlFor='password'>Password</FormLabel>
+                  <Input {...field} id='password' placeholder='password' />
+                  <FormErrorMessage>{form.errors.password}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
+            <Button
+              mt={4}
+              variantColor='teal'
+              isLoading={props.isSubmitting}
+              type='submit'
+            >
+              Submit
+            </Button>
+          </form>
+        )}
+      </Formik>
+
+      <List as='ol' styleType='disc'>
+        {console.log(user)}
+        {
+          user.map(function (item, index) {
+            return <ListItem key={index}>{item.id}-------{item.name}------- {item.pwd}--------{item.email}</ListItem>
+          })
+
+        }
+      </List>
     </ThemeProvider>
   )
 }
 
+export async function getStaticProps () {
+  const apolloClient = initializeApollo()
+  await apolloClient.query({
+    query: ViewerQuery
+  })
+
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract()
+    }
+  }
+}
 export default Index
