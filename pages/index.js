@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { initializeApollo } from '../apollo/client'
-import { ThemeProvider, Button, Text } from '@chakra-ui/core'
+import { ThemeProvider, Button, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/core'
 import Router from 'next/router'
 
 // 定义查询内容
@@ -28,22 +29,20 @@ const Index = () => {
 
   return (
     <ThemeProvider>
-      <Text as='samp' color='tomato'>apollo-server数据列表</Text>
+      <Text as='samp' color='tomato'>apollo-server数据查询列表</Text>
       <ul>
         {viewer.map(function (item, index) {
-          return <li key={index}>name:{item.name}---- pwd:{item.pwd}----email:{item.email}</li>
+          return <li key={index}>{item.id}-------{item.name}------- {item.pwd}--------{item.email}</li>
         })}
       </ul>
-
       <div />
-
-      <Button type='submit' onClick={() => { Router.push('/apollo-mutations') }}>进入添加页面</Button>
+      <Button type='submit' onClick={() => { Router.push('/') }}>添加</Button>
       <div />
     </ThemeProvider>
   )
 }
 
-export async function getStaticProps () {
+export async function getStaticProps() {
   const apolloClient = initializeApollo()
   await apolloClient.query({
     query: ViewerQuery

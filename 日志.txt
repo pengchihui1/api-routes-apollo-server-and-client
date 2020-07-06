@@ -6,3 +6,8 @@ nextjs(next官网)  https://www.nextjs.cn/docs/api-reference/next/router
 apollo-client 数据查询成功
 apollo-client 数据更新参考https://www.bilibili.com/video/BV1yJ411w7vx?p=5
 apollo-client
+
+http://localhost:3000/api/graphql
+JSON.stringify()的作用是将 JavaScript 对象转换为 JSON 字符串
+JSON.parse 字符串转换为对象
+addArray.push 结尾

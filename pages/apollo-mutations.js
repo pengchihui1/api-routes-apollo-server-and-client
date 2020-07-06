@@ -7,30 +7,28 @@ import { initializeApollo } from '../apollo/client'
 
 // 定义增加内容
 const ADD_TODO = gql`
-  mutation AddTodo($name:String ,$pwd:String) {
+  mutation CreateTodo($name:String ,$pwd:String) {
     addTodo(name:$name, pwd:$pwd) {	
 			name
 			pwd
 		}
 	}
 `
-// mutation查询mutation {addTodo{name 	pwd 	}	}
+// mutation查询mutation {addTodo{name 	pwd }	}
 
 const Indexss = () => {
-	// 执行增加
-	const [addTodo, { data }] = useMutation(ADD_TODO)
-	console.log(addTodo)
-	console.log(data)
+  // 执行增加
+  const [addTodo, { data }] = useMutation(ADD_TODO)
 
-	return (
-		<ThemeProvider>
-			<div>
-				<form onSubmit={e => { addTodo({ variables: { name: '123sdfef', pwd: '485safe' } }) }}>
-					<Button type='submit'>Add Todo</Button>
-				</form>
-			</div>
-		</ThemeProvider>
-	)
+  return (
+    <ThemeProvider>
+      <div>
+        <form onSubmit={e => { e.preventDefault; addTodo({ variables: { name: '123sdfef', pwd: '485safe' } }) }}>
+          <Button type='submit'>  Add Todo</Button>
+        </form>
+      </div>
+    </ThemeProvider>
+  )
 }
 
 export default Indexss
