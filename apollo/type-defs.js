@@ -1,5 +1,4 @@
-//gql字段格式
-
+// gql字段格式
 
 import gql from 'graphql-tag'
 
@@ -16,8 +15,7 @@ export const typeDefs = gql`
   type Query {
     viewer: [User]
   }
-	
-	type Add{
+type Add{
 		id: ID!
 		name: String!
 		status: String!
@@ -26,7 +24,8 @@ export const typeDefs = gql`
 		email: String!
 		success: Boolean!
 	}
-	type Mutation {
+
+type Mutation {
      addTodo:[Add]
  }  
 
