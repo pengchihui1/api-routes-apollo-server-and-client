@@ -3,18 +3,18 @@
 import gql from 'graphql-tag'
 
 export const typeDefs = gql`
-  type User {
-    id: Int
-    name: String
-    status: String
-		titile:String
-		pwd:String
-		email: String
-	  success: Boolean
-  }
-  type Query {
-    viewer: [User]
-  }
+type User {
+  id: Int
+  name: String
+  status: String
+  titile:String
+  pwd:String
+  email: String
+  success: Boolean
+}
+type Query {
+  viewer: [User]
+}
 
 type Book {
   title: String
@@ -22,10 +22,11 @@ type Book {
 }
 
 type Mutation {
-	   addTodo(name: String, pwd: String):User
+	   addTodo(id:Int,name: String, pwd: String):User
      removeTodo(id:Int):[User]
+     removeOne(id:Int):[User]
+     updataOne(id:Int,name:String,pwd:String):User
      updateTodo(id:Int):[User]
-	   addBook(title: String, author: String): [Book]
  }  
 
 `

@@ -22,11 +22,12 @@ export const resolvers = {
     addTodo (_parent, _args, _context, _info) {
       var arr = ArrayObj
       const input = _args
-      arr.push({ name: input.name, pwd: input.pwd })
+      const obj = { id: input.id, name: input.name, pwd: input.pwd }
+      arr.push(obj)
       ArrayObj = arr
-      return { name: input.name, pwd: input.pwd }
+      return obj
     },
-    // 删除
+    // 删除返回数组
     removeTodo (_parent, _args, _context, _info) {
       const input = _args
       const newCount = ArrayObj.filter((item, index) => {
@@ -34,6 +35,30 @@ export const resolvers = {
       })
       ArrayObj = newCount
       return ArrayObj
+    },
+    // 删除返回对象
+    removeOne (_parent, _args, _context, _info) {
+      const input = _args
+      const obj = { id: input.id }
+      ArrayObj.forEach((element, index) => {
+        if (element.id == input.id) {
+          ArrayObj.splice(index, 1)
+        }
+      })
+      console.log(ArrayObj)
+      return ArrayObj
+    },
+    updataOne (_parent, _args, _context, _info) {
+      const input = _args
+      const obj = { id: input.id, name: input.name, pwd: input.pwd }
+      // console.log(obj)
+      for (let wei = 0; wei < ArrayObj.length; wei++) {
+        if (ArrayObj[wei].id == input.id) {
+          ArrayObj[wei].name = input.name
+          ArrayObj[wei].pwd = input.pwd
+        }
+      }
+      return obj
     }
 
   }
