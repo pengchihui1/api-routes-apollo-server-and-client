@@ -36,11 +36,11 @@ const Index = () => {
   const [user, setUser] = useState([])
   // 执行查询
   const { loading, error, data } = useQuery(ViewerQuery)
-  // 记录查询后并增加的内容
+  // 首次记录查询的内容
   useEffect(() => {
-    console.log('nimei', data.viewer.length)
+    // console.log('nimei', data.viewer.length)
     if (data.viewer.length) {
-      console.log(data.viewer)
+      // console.log(data.viewer)
       setUser(data.viewer)
     }
   }, [data.viewer])
@@ -57,7 +57,7 @@ const Index = () => {
     }
     return error
   }
-  // const a = data
+
   return (
     <ThemeProvider>
       <Formik
@@ -66,6 +66,7 @@ const Index = () => {
           addTodo({ variables: { name: values.name, pwd: values.password } })
             .then(({ data }) => {
               setSubmitting(false)
+              // 执行增加后的对象 添加到 useState中
               setUser([...user, { ...data.addTodo, id: parseInt(Math.random() * 100) }])
             })
         }}
