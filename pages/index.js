@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { useQuery,useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { initializeApollo } from '../apollo/client'
-import { ThemeProvider,Button,Text  } from "@chakra-ui/core";
-import Router from 'next/router'  
+import { ThemeProvider, Button, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/core'
+import Router from 'next/router'
+import formA from './form'
 
 // 定义查询内容
 const ViewerQuery = gql`
@@ -21,27 +23,23 @@ const ViewerQuery = gql`
 `
 
 const Index = () => {
-	
-		//执行查询 
-		const { loading, error,	data: { viewer }} = useQuery(ViewerQuery);
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
-		 
-		 
+  // 执行查询
+  const { loading, error, data: { viewer } } = useQuery(ViewerQuery)
+  if (loading) return 'Loading...'
+  if (error) return `Error! ${error.message}`
+
   return (
-		<ThemeProvider>
-		<Text as="samp" color="tomato">apollo-server数据列表</Text>
-		   <ul>
-			 {viewer.map(function(item,index){
-				  return  <li key={index}>name:{item.name}---- pwd:{item.pwd}----email:{item.email }</li>
-			 })}
-			</ul>
-  
-			<div></div>
-		
-			<Button  type="submit" onClick={()=>{Router.push("/apollo-mutations") }}>进入添加页面</Button>
-			<div></div>
-	</ThemeProvider>
+    <ThemeProvider>
+      <Text as='samp' color='tomato'>apollo-server数据查询列表</Text>
+      <ul>
+        {viewer.map(function (item, index) {
+          return <li key={index}>{item.id}-------{item.name}------- {item.pwd}--------{item.email}</li>
+        })}
+      </ul>
+      <div />
+      <Button type='submit' onClick={() => { Router.push('/form') }}>Form测试</Button>
+      <div />
+    </ThemeProvider>
   )
 }
 

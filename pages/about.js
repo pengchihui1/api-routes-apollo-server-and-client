@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useQuery,useMutation } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import { initializeApollo } from '../apollo/client'
-import { ThemeProvider,Button,Text  } from "@chakra-ui/core";
-import Router from 'next/router'  
+import { ThemeProvider, Button, Text } from "@chakra-ui/core";
+import Router from 'next/router'
 
 
 // 定义查询内容
@@ -31,13 +31,13 @@ const ADD_TODO = gql`
   }
 `;
 export default function About() {
-	  const { loading, error, data } = useQuery(ViewerQuery);
-	  const [addTodo, { datas }] = useMutation(ADD_TODO);
-		
-		if (loading) return <p>Loading...</p>;
-     if (error) return <p>Error :(</p>;
+  const { loading, error, data } = useQuery(ViewerQuery);
+  const [addTodo, { datas }] = useMutation(ADD_TODO);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error :(</p>;
   return (
-     <div>
+    <div>
       <form
         onSubmit={e => {
           e.preventDefault();
