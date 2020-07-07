@@ -54,14 +54,16 @@ const Index = () => {
         initialValues={{ name: '', password: '' }}
         onSubmit={(values, { setSubmitting }) => {
           num++
-          const ida = parseInt(Math.random() * 1000) + num
-          addTodo({ variables: { id: ida, name: values.name, pwd: values.password } })
+          //随机id
+					const ida = parseInt(Math.random() * 1000) + num
+          //添加过程
+					addTodo({ variables: { id: ida, name: values.name, pwd: values.password } })
             .then(({ data }) => {
               // console.log("添加成功")
 							console.log(data)
               // 执行增加返回后的对象 添加到useState中 { ...data.addTodo, id: parseInt(Math.random() * 100) }
               // setUser([...user, { ...data.addTodo, id:ida }])
-							 // setUser(data.addTodo)
+							 setUser([...user, { ...data.addTodo, id:ida }])
 							 setSubmitting(false)
             }).catch((error)=>{
 							 console.log("添加失败")

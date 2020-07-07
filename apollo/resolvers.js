@@ -23,7 +23,7 @@ export const resolvers = {
       const input = _args
       const obj = { id: input.id, name: input.name, pwd: input.pwd }
       ArrayObj.push(obj)
-			console.log(ArrayObj)
+			// console.log(ArrayObj)
       return  ArrayObj
     },
     // 删除返回数组
