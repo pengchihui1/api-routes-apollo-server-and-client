@@ -7,7 +7,7 @@ import { initializeApollo } from '../apollo/client'
 
 // 定义增加内容
 const ADD_TODO = gql`
-  mutation AddTodo($name:String ,$pwd:String) {
+  mutation AddTodo($name:String! ,$pwd:String!) {
     addTodo(name:$name, pwd:$pwd) {
      returning{
 		 name
@@ -29,7 +29,7 @@ const Indexss = () => {
 	 return(
 	 <ThemeProvider>
 	    <div>
-      <form  onSubmit={e => {e.preventDefault(); AddTodo({variables:{ 'name':'123sdfef','pwd':'485safe' }}); }} >
+      <form  onSubmit={e => {e.preventDefault(); addTodo({variables:{ name:'123sdfef',pwd:'485safe' }}); }} >
         <Button type="submit">Add Todo</Button>
       </form>
     </div>
@@ -37,16 +37,16 @@ const Indexss = () => {
 	 )
 	
 }
-// export async function getStaticProps () {
-//   const apolloClient = initializeApollo()
-//   await apolloClient.query({
-// 	mutation:ADD_TODO
-//   })
-//   return {
-//     props: {
-//       initialApolloState: apolloClient.cache.extract()
-//     }
-//   }
-// }
+export async function getStaticProps () {
+  const apolloClient = initializeApollo()
+  await apolloClient.query({
+	mutation:ADD_TODO
+  })
+  return {
+    props: {
+      initialApolloState: apolloClient.cache.extract()
+    }
+  }
+}
 
 export default Indexss

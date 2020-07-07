@@ -16,18 +16,17 @@ export const typeDefs = gql`
   type Query {
     viewer: [User]
   }
-	
-	type Add{
-		id: ID!
-		name: String!
-		status: String!
+	type King {
+	  id: ID!
+	  name: String!
+	  status: String!
 		titile:String!
 		pwd:String!
 		email: String!
-		success: Boolean!
+	  success: Boolean!
 	}
 	type Mutation {
-     addTodo:[Add]
+     addTodo:[King]
  }  
 
 `
