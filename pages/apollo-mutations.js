@@ -7,35 +7,18 @@ import { initializeApollo } from '../apollo/client'
 
 // 定义增加内容
 const ADD_TODO = gql`
-<<<<<<< HEAD
-  mutation AddTodo($name:String! ,$pwd:String!) {
-    addTodo(name:$name, pwd:$pwd) {
-     returning{
-		 name
-	     pwd
-	
-	 }
-    }
-  }
-=======
+
   mutation CreateTodo($name:String ,$pwd:String) {
     addTodo(name:$name, pwd:$pwd) {	
 			name
 			pwd
 		}
 	}
->>>>>>> 8c19a70e99e4c813b9137b5608e42dae051f00e1
 `
-// mutation查询mutation {addTodo{name 	pwd }	}
 
-const Indexss = () => {
-<<<<<<< HEAD
-	
+const Indexss = () => {	
 	//执行增加
     const [addTodo, { data,error: mutationError } ] = useMutation(ADD_TODO);
-	console.log(addTodo)
-	console.log(data) 
-	
 	 return(
 	 <ThemeProvider>
 	    <div>

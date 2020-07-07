@@ -20,12 +20,11 @@ export const resolvers = {
   Mutation: {
     // 新增后执行的回传 定义全局变量  拼接后return返回
     addTodo (_parent, _args, _context, _info) {
-      var arr = ArrayObj
       const input = _args
       const obj = { id: input.id, name: input.name, pwd: input.pwd }
-      arr.push(obj)
-      ArrayObj = arr
-      return obj
+      ArrayObj.push(obj)
+			console.log(ArrayObj)
+      return  ArrayObj
     },
     // 删除返回数组
     removeTodo (_parent, _args, _context, _info) {
@@ -36,7 +35,7 @@ export const resolvers = {
       ArrayObj = newCount
       return ArrayObj
     },
-    // 删除返回对象
+    // //数组中删除指定id的内容  返回这个id 避免报400
     removeOne (_parent, _args, _context, _info) {
       const input = _args
       const obj = { id: input.id }
@@ -48,6 +47,7 @@ export const resolvers = {
       console.log(ArrayObj)
       return ArrayObj
     },
+		//数组中修改指定id的内容  返回一个值 避免报错400
     updataOne (_parent, _args, _context, _info) {
       const input = _args
       const obj = { id: input.id, name: input.name, pwd: input.pwd }
