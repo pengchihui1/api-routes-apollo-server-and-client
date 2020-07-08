@@ -16,24 +16,23 @@ const ADD_TODO = gql`
 	}
 `
 
-const Indexss = () => {	
-	//执行增加
-    const [addTodo, { data,error: mutationError } ] = useMutation(ADD_TODO);
-	 return(
-	 <ThemeProvider>
-	    <div>
-      <form  onSubmit={e => {e.preventDefault(); addTodo({variables:{ name:'123sdfef',pwd:'485safe' }}); }} >
-        <Button type="submit">Add Todo</Button>
-      </form>
-    </div>
-	</ThemeProvider>
-	 )
-	
+const Indexss = () => {
+  // 执行增加
+  const [addTodo, { data, error: mutationError }] = useMutation(ADD_TODO)
+  return (
+    <ThemeProvider>
+      <div>
+        <form onSubmit={e => { e.preventDefault(); addTodo({ variables: { name: '123sdfef', pwd: '485safe' } }) }}>
+          <Button type='submit'>Add Todo</Button>
+        </form>
+      </div>
+    </ThemeProvider>
+  )
 }
 export async function getStaticProps () {
   const apolloClient = initializeApollo()
   await apolloClient.query({
-	mutation:ADD_TODO
+    mutation: ADD_TODO
   })
   return {
     props: {
@@ -41,20 +40,5 @@ export async function getStaticProps () {
     }
   }
 }
-=======
-  // 执行增加
-  const [addTodo, { data }] = useMutation(ADD_TODO)
-
-  return (
-    <ThemeProvider>
-      <div>
-        <form onSubmit={e => { e.preventDefault; addTodo({ variables: { name: '123sdfef', pwd: '485safe' } }) }}>
-          <Button type='submit'>  Add Todo</Button>
-        </form>
-      </div>
-    </ThemeProvider>
-  )
-}
->>>>>>> 8c19a70e99e4c813b9137b5608e42dae051f00e1
 
 export default Indexss

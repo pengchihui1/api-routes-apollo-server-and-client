@@ -6,16 +6,32 @@ nextjs(next官网)  https://www.nextjs.cn/docs/api-reference/next/router
 apollo-client 数据查询成功
 apollo-client 数据更新参考https://www.bilibili.com/video/BV1yJ411w7vx?p=5
 apollo-client 
-http://localhost:3000/api/graphql
+
+本地graphql地址    http://localhost:3000/api/graphql
+
+字符串处理
 JSON.stringify()的作用是将 JavaScript 对象转换为 JSON 字符串
 JSON.parse 字符串转换为对象
 addArray.push 结尾
 
-随机数相同时  先前去掉了  后面会报错
-借鉴课程 https://youtu.be/ZPQ7mazzy_8?list=PLTRTpHrUcSB9r_B0bI_j_JZMkUMS9Wea-
-id parseInt
+2020-7-6
+graphql-playgound 增删查改  借鉴课程 https://youtu.be/ZPQ7mazzy_8?list=PLTRTpHrUcSB9r_B0bI_j_JZMkUMS9Wea-
 
-20207-7-7
-删除开始报id错误
+2020-7-7
+删除开始报id错误  前端id随机数导致  apollo可以看到 前端不能看到   parseInt(Math.random() * 100)
 修改完成
 删除重新渲染待改进
+
+2020-7-8
+删除完成
+
+问题及方式
+id   添加之后 返回的数组id不存在，引起后面删除修改功能没有id会报错
+apollo数据异步处理/随机数改成，点击一次id加一  
+
+form页面，添加成功时apollo变异未更新
+参考官网 https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
+
+
+
+

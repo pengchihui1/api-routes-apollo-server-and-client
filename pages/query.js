@@ -7,43 +7,45 @@ import { initializeApollo } from '../apollo/client'
 import { ThemeProvider, Button, Text, FormControl, FormLabel, FormErrorMessage, FormHelperText, Input } from '@chakra-ui/core'
 import { useRouter } from 'next/router'
 
-// 定义删除内容
-const RemoveOne = gql`
- mutation removeToDo($id:Int) {
-    removeOne(id:$id) {	
+// 定义查询内容
+const NewQuery = gql`
+  query ViewerQuery {
+    viewer {
       id
       name
-      pwd
-		}
-	} 
+      status
+			titile
+			email
+			pwd
+			success
+    }
+  }
 `
 const deletes = () => {
   // 使用路由
   const router = useRouter()
   const id1 = router.query.id
-  // 执行删除
-  const [removeOnes] = useMutation(RemoveOne)
-  if (!id1) return null
+  // 执行查询
+  const { data } = useQuery(NewQuery)
 
-  // 删除事件
-  function onRemove () {
-    removeOnes({ variables: { id: parseInt(id1) } }).then(({ data }) => {
-      console.log('删除成功:')
+  // 查询事件
+  function onQuery() {
+    viewer({ variables: { id: parseInt(id1) } }).then(({ data }) => {
+      console.log('查询成功:')
       // console.log(data)
       router.push('/form')
+    }).catch((error) => {
+      console.log('查询失败')
     })
-    // .catch((error) => {
-    //    console.log('删除失败')
-    //  })
   }
 
   return (
     <ThemeProvider>
       <Button
         mt={4}
-        onClick={() => { onRemove() }}
+        onClick={() => { onQuery() }}
       >
-				确认删除
+        重新查询数据
       </Button>
     </ThemeProvider>
   )

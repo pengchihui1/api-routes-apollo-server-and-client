@@ -10,24 +10,29 @@ var ArrayObj = [
   { id: 6, name: 'Kai lii', status: 'cached', titile: 'cewefa', pwd: 'dsagewr', email: '265656565@example.com', success: true }
 ]
 
+const num = 10
 export const resolvers = {
   Query: {
-    // 查询
-    viewer (_parent, _args, _context, _info) {
+    viewer(_parent, _args, _context, _info) {
+      return ArrayObj
+    },
+    newQuery(_parent, _args, _context, _info) {
       return ArrayObj
     }
   },
   Mutation: {
     // 新增后执行的回传 定义全局变量  拼接后return返回
-    addTodo (_parent, _args, _context, _info) {
+    addTodo(_parent, _args, _context, _info) {
       const input = _args
-      const obj = { id: input.id, name: input.name, pwd: input.pwd }
+      const obj = {
+        id: parseInt(parseInt(Math.random() * 150 + Math.random() * 30)), name: input.name ? input.name : '空', pwd: input.pwd ? input.pwd : '空'
+      }
       ArrayObj.push(obj)
-			// console.log(ArrayObj)
-      return  ArrayObj
+      // console.log(obj)
+      return obj
     },
     // 删除返回数组
-    removeTodo (_parent, _args, _context, _info) {
+    removeTodo(_parent, _args, _context, _info) {
       const input = _args
       const newCount = ArrayObj.filter((item, index) => {
         return item.id !== input.id
@@ -36,7 +41,7 @@ export const resolvers = {
       return ArrayObj
     },
     // //数组中删除指定id的内容  返回这个id 避免报400
-    removeOne (_parent, _args, _context, _info) {
+    removeOne(_parent, _args, _context, _info) {
       const input = _args
       const obj = { id: input.id }
       ArrayObj.forEach((element, index) => {
@@ -44,11 +49,11 @@ export const resolvers = {
           ArrayObj.splice(index, 1)
         }
       })
-      console.log(ArrayObj)
+      // console.log(ArrayObj)
       return ArrayObj
     },
-		//数组中修改指定id的内容  返回一个值 避免报错400
-    updataOne (_parent, _args, _context, _info) {
+    // 数组中修改指定id的内容  返回一个值 避免报错400
+    updataOne(_parent, _args, _context, _info) {
       const input = _args
       const obj = { id: input.id, name: input.name, pwd: input.pwd }
       // console.log(obj)

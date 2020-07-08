@@ -36,13 +36,11 @@ const updata = (props) => {
         onSubmit={(values, { setSubmitting }) => {
           // const namea = values.name == '' ? a1 : values.name
           // const pwda = values.password == '' ? a2 : values.password
-          console.log(id1, values.name, values.password)
           updateTodo({ variables: { id: parseInt(id1), name: values.name, pwd: values.password } })
             .then(({ data }) => {
               console.log('更新成功:')
-              console.log(data.updataOne)
-              router.push('/form')
               setSubmitting(false)
+              router.push('/form')
             }).catch((error) => {
               console.log('更新失败')
               setSubmitting(false)

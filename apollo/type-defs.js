@@ -14,15 +14,11 @@ type User {
 }
 type Query {
   viewer: [User]
-}
-
-type Book {
-  title: String
-  author: String
+  newQuery:[User]
 }
 
 type Mutation {
-	   addTodo(id:Int,name: String, pwd: String):[User]
+	   addTodo(name: String, pwd: String):User
      removeTodo(id:Int):[User]
      removeOne(id:Int):[User]
      updataOne(id:Int,name:String,pwd:String):User
