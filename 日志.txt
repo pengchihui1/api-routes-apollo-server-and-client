@@ -27,10 +27,51 @@ graphql-playgound 增删查改  借鉴课程 https://youtu.be/ZPQ7mazzy_8?list=P
 
 问题及方式
 id   添加之后 返回的数组id不存在，引起后面删除修改功能没有id会报错
-apollo数据异步处理/随机数改成，点击一次id加一  
+apollo数据异步处理/由前端设置id转为apollo设置id，点击一次id加  
 
 form页面，添加成功时apollo变异未更新
 参考官网 https://www.apollographql.com/docs/react/data/mutations/#making-all-other-cache-updates
+
+find() 方法返回数组中满足提供的测试函数的第一个元素的值。否则返回 undefined
+const array1 = [5, 12, 8, 130, 44];
+const found = array1.find(element => element > 10);
+console.log(found);
+// expected output: 12
+
+story组件化  chakra常用简写
+button
+variant="outline"
+variantColor="blue"
+variantColor='red'
+minW={{ base: '100%', md: '180px' }}
+boxShadow: '0 0 0 3px rgba(175, 175, 175, 0.6)'
+_focus={{boxShadow: '0 0 0 3px rgba(175, 175, 175, 0.6)'}}
+_hover={{bg: '#b8b8b8'}}
+transform="translate(0,-50%)
+
+flex
+alignItems='center'
+justifyContent='center'
+overflow='hidden'  
+rounded='50%'
+
+text
+fontSize='md'
+color='gray.400' 
+<Heading as='h4' size='md'>
+textAlign="center"
+
+nivo数据可视化
+https://nivo.rocks/bar
+nivo得单独弄一个文件，，然后在需要的页面引用 并传递数据过去  
+如果在页面使用nivo并定义数据，页面是不会显示内容  不会报错
+
+ 
+ admin newModal关闭打开
+ 
+
+
+
 
 
 
