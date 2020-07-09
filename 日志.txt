@@ -47,27 +47,51 @@ minW={{ base: '100%', md: '180px' }}
 boxShadow: '0 0 0 3px rgba(175, 175, 175, 0.6)'
 _focus={{boxShadow: '0 0 0 3px rgba(175, 175, 175, 0.6)'}}
 _hover={{bg: '#b8b8b8'}}
-transform="translate(0,-50%)
+transform="translate(0,-50%)   
+visibility='visible'/'hidden'
+_active
+borderColor
+rounded="2px"
+transition="all 0.2s cubic-bezier(.08,.52,.52,1)"
+
 
 flex
 alignItems='center'
 justifyContent='center'
 overflow='hidden'  
 rounded='50%'
+flexDirection='column'
 
 text
 fontSize='md'
 color='gray.400' 
 <Heading as='h4' size='md'>
 textAlign="center"
+lineHeight='40px'
 
 nivo数据可视化
 https://nivo.rocks/bar
 nivo得单独弄一个文件，，然后在需要的页面引用 并传递数据过去  
 如果在页面使用nivo并定义数据，页面是不会显示内容  不会报错
 
- 
- admin newModal关闭打开
+ 2020-7-9
+chakra常用配合
+PseudoBox Editable  onChange onEdit onSubmit
+Stack Select Button
+
+正则
+const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+i    忽略大小写 (例：test可匹配到Test、TEST、tEST等等)。
+g   全局匹配（符合贪婪匹配原则 - 尽可能匹配多个）
+m   换行匹配（ 对获取textarea元素的值很有用 ）
+!re.test(String(email).toLowerCase())) ? 'email 格式錯誤' : ''
+
+target：事件源组件对象
+currentTarget：当前组件对象
+当事件没有冒泡行为时，e.target与e.currentTarget都指向事件触发的对象
+
+ storybook引入不大写不显示
+
  
 
 
